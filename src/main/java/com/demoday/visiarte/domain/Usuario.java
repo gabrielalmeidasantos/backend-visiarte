@@ -23,6 +23,8 @@ public class Usuario implements Serializable {
 	private String foto_capa;
 	private int quant_seguidores;
 	private int quant_seguindo;
+
+	private String senhaCriptografada;
 	
 	public Usuario() {
 		

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
+    //Essa classe é responsável por tratar os erros retornados pelo programa.
 
+    //Essa função é responsável pelo erro não encontrado.
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
