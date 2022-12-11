@@ -46,6 +46,10 @@ public class Usuario implements Serializable {
 		this.quant_seguidores = quant_seguidores;
 		this.quant_seguindo = quant_seguindo;
 	}
+	public Usuario(String nome_usuario, String senha){
+		this.nome_completo = nome_usuario;
+		this.senha = senha;
+	}
 
 	public String getId() {
 		return id;

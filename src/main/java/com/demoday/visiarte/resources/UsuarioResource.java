@@ -2,6 +2,7 @@ package com.demoday.visiarte.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.demoday.visiarte.dto.UsuarioDTO;
@@ -51,6 +52,7 @@ public class UsuarioResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(user.getNome_usuario()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+
 	//DeleteMapping padrão.
 	@DeleteMapping(path = "/{id}")
 	//Função responsável por deletar um usuário pelo Id
@@ -58,10 +60,10 @@ public class UsuarioResource {
 		service.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
 	//Put padrão.
 	@PutMapping(path = "/update/{id}")//ESse é o path do mapping, o path contém uma variável chamada {id}, o @PathVariable serve para especificar que tipo de variável
 	//está sendo passada.
-
 	//Função responsável por atualizar um usuário sendo buscado pelo ID.
 	public ResponseEntity<Void> replace(@PathVariable String id, @RequestBody Usuario usuario){
 		service.replace(id, usuario);
@@ -69,5 +71,14 @@ public class UsuarioResource {
 	}
 
 
+	//Função responsável pelo login da plataforma.
+	//O objeto Map, foi de extrema importância para conluir essa função de login, ele é responsável por quebrar o @ResquestBody
+	//em diferentes strings.
+	@PostMapping(path = "/login")
+	public Usuario login(@RequestBody Map<String, String> userMap){
+		String username = userMap.get("nome_usuario");
+		String senha = userMap.get("senha");
+		return service.login(username, senha);
+	}
 
 }

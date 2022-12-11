@@ -77,27 +77,24 @@ public class UsuarioService {
 		deleteById(id);
 		repo.save(usuario);
 	}
-	public boolean login(String usuario, String senha){
-		String loginStatus;
-		String senhaStatus;
-		Usuario lookingForUsername = repo.findUsername(usuario);
-		boolean status = false;
-		if (lookingForUsername != null){
-			//Achou o usuário
-			loginStatus = "Usuário encontrado";
-			if (Objects.equals(lookingForUsername.getSenha(), senha)){
-				status = true;
-				//Usuário e senha encontrados.
-			}
-			else {
-				senhaStatus = "Senha não corresponde a este usuário.";
-			}
+	public Usuario login(String username, String senha){
+		Usuario usuario = repo.findUsername(username);
 
+		if (usuario != null){
+			//Achou o usuário
+			if (!Objects.equals(usuario.getSenha(), senha)){
+				//Usuário e senha encontrados.
+				throw new ObjectNotFoundException("Senha não corresponde ao usuário encontrado.");
+			}
 		}
 		else {
-			loginStatus = "Usuario não encontrado";
+			throw new ObjectNotFoundException("Usuário não encontrado");
 		}
-		return false;
+		return usuario;
 	}
+
+
+
+
 
 }
