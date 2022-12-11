@@ -76,7 +76,7 @@ public class UsuarioResource {
 	//em diferentes strings.
 	@PostMapping(path = "/login")
 	public Usuario login(@RequestBody Map<String, String> userMap){
-		String username = userMap.get("nome_usuario");
+		String username = userMap.get("usuarioLogin");
 		String senha = userMap.get("senha");
 		return service.login(username, senha);
 	}

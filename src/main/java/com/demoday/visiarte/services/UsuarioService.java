@@ -77,8 +77,8 @@ public class UsuarioService {
 		deleteById(id);
 		repo.save(usuario);
 	}
-	public Usuario login(String username, String senha){
-		Usuario usuario = repo.findUsername(username);
+	public Usuario login(String usuarioLogin, String senha){
+		Usuario usuario = repo.findUsername(usuarioLogin);
 
 		if (usuario != null){
 			//Achou o usuário
@@ -88,7 +88,16 @@ public class UsuarioService {
 			}
 		}
 		else {
-			throw new ObjectNotFoundException("Usuário não encontrado");
+			usuario = repo.findEmail(usuarioLogin);
+			if (usuario != null){
+				if (!Objects.equals(usuario.getSenha(), senha)){
+					//Usuário e senha encontrados.
+					throw new ObjectNotFoundException("Senha não corresponde ao email encontrado.");
+				}
+			}
+			else {
+				throw new ObjectNotFoundException("usuário/email não encontrado");
+			}
 		}
 		return usuario;
 	}
