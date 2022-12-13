@@ -17,7 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 //Almeida pelo amor de deus, comenta esse código meu fi kkkkkkkkkkkkkk.
 
+
 @RestController //Identificador para o spring saber que estamos lidando com um controller, fazendo ele herdar todas as funções de um controller.
+@CrossOrigin(origins = "*")
 @RequestMapping(value="/usuarios") //outro identificador. Para rodar todas as funções dentro do controller, vamos ter que acessar por esse path.
 public class UsuarioResource {
 	//--------------------------------------------Instanciações------------------------------------------------------------------------------------
